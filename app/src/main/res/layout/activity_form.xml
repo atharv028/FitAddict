@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.Form">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About You"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is your Goal?"
+        android:layout_marginTop="40sp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"
+        />
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinGoal"
+        android:layout_marginStart="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/support_simple_spinner_dropdown_item"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is your activity level?"
+        android:layout_marginTop="40sp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"
+        />
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinActivity"
+        android:layout_marginStart="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/support_simple_spinner_dropdown_item"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:layout_marginTop="40sp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ETheight"
+        android:layout_marginStart="30dp"
+        android:layout_width="60dp"
+        android:hint="0 cm"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight"
+        android:layout_marginTop="40sp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ETweight"
+        android:layout_marginStart="30dp"
+        android:layout_width="60dp"
+        android:hint="0 kg"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/BTform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        />
+
+</LinearLayout>

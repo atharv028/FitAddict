@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "603746605086",
+    "project_id": "fitaddict-77100",
+    "storage_bucket": "fitaddict-77100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603746605086:android:8179ef53e5d9a8bee7760f",
+        "android_client_info": {
+          "package_name": "com.tare.fitaddict"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603746605086-77g3k3935194a2m8oudgbtspki0qcej8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tare.fitaddict",
+            "certificate_hash": "f5be8e832d83c99e9bc73a2255884312336dee95"
+          }
+        },
+        {
+          "client_id": "603746605086-aepinv7l9rql406av7jcifr5tg064ntr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9SjgMv4zsKZqEOc-jrtCHxgOfsJmeJoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603746605086-aepinv7l9rql406av7jcifr5tg064ntr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

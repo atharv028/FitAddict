@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/drawable/ic_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.216" />
+        <entry key="app/src/main/res/layout/activity_fblogin.xml" value="0.3346196492513021" />
+        <entry key="app/src/main/res/layout/activity_food_search.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_form.xml" value="0.3249684651692708" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.38828023274739576" />
+        <entry key="app/src/main/res/layout/activity_nutrition.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_opening.xml" value="0.14114583333333333" />
+        <entry key="app/src/main/res/layout/activity_recipe_view.xml" value="0.33873189290364586" />
+        <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.3582656860351563" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/empty.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/food_item.xml" value="0.31766611735026035" />
+        <entry key="app/src/main/res/layout/fragment_calories.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.24774119059244798" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_home2.xml" value="0.2989354451497396" />
+        <entry key="app/src/main/res/layout/fragment_image.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_macros.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_nurtients.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.21402486165364576" />
+        <entry key="app/src/main/res/layout/fragment_workout.xml" value="0.3246159871419271" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.25828391627261515" />
+        <entry key="app/src/main/res/layout/listitem_diary.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/result_item.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/search_item.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/temp.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/temp2.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/menu/mymenu.xml" value="0.15520833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
