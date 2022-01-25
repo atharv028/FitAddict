@@ -7,12 +7,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
@@ -21,73 +23,55 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tare.fitaddict.MainActivity
 import com.tare.fitaddict.R
+import com.tare.fitaddict.UserRepository
+import com.tare.fitaddict.databinding.ActivityLoginBinding
+import com.tare.fitaddict.firebase.AuthHelper
+import com.tare.fitaddict.ui.auth.LoginViewModel
 
 class Login : AppCompatActivity() {
-    private lateinit var email : EditText
-    private lateinit var password : EditText
-    private lateinit var button : Button
-    private lateinit var google : SignInButton
     private lateinit var  fb : LoginButton
     private lateinit var auth: FirebaseAuth
     private val callbackManager = CallbackManager.Factory.create()
+    private lateinit var googleSignInClient: GoogleSignInClient
+    val mainViewModel: LoginViewModel = LoginViewModel(repository = UserRepository(firebase = AuthHelper))
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.apply {
+            Log.d("sfd", "Called")
+            lifecycleOwner = this@Login
+            viewModel = mainViewModel
+        }
         auth = FirebaseAuth.getInstance()
-
         //-------------------------Variables--------------------//
-        email = findViewById(R.id.ETlogEmail)
-        password = findViewById(R.id.ETlogPass)
-        button = findViewById(R.id.BTlogSubmit)
-        google = findViewById(R.id.googleLog)
+        val google = findViewById<SignInButton>(R.id.googleLog)
         fb = findViewById(R.id.fbLog)
 
         //-------------------------Google----------------------//
+        initGoogleSignInClient()
+
+        google.setOnClickListener {
+            signInUsingGoogle()
+        }
+//        // ---------------------Facebook-------------------//
+//        fb.setOnClickListener {
+//            fb(fb)
+//        }
+
+
+    }
+
+    private fun initGoogleSignInClient()
+    {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("603746605086-1tddusft9jn53g3jj0g1ug4ss1th5ulb.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
-        val googlesignInClient = GoogleSignIn.getClient(this, gso)
-
-        google.setOnClickListener {
-            signIn(googlesignInClient)
-        }
-
-        //------------------------Normal--------------------//
-        button.setOnClickListener {
-            if (email.editableText.isEmpty() or password.editableText.isEmpty()) {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            normal(email.editableText.toString(), password.editableText.toString())
-        }
-
-        // ---------------------Facebook-------------------//
-        fb.setOnClickListener {
-            fb(fb)
-        }
-
-
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    private fun normal(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("TAG", "Sign In Successful")
-                    goto()
-                }
-                else
-                {
-                    Log.w("TAG", "Failed (email)", task.exception)
-                    Toast.makeText(this, "Authentication Failed", Toast.LENGTH_LONG).show()
-                    return@addOnCompleteListener
-                }
-            }
-    }
-
-    private fun signIn(googleSignInClient: GoogleSignInClient)
+    private fun signInUsingGoogle()
     {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, 2)
@@ -100,26 +84,21 @@ class Login : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                Log.d("TAG", "firebase auth with Google :" + account?.id)
-                val credential = GoogleAuthProvider.getCredential(account?.idToken!!, null)
-                auth.signInWithCredential(credential)
-                    .addOnCompleteListener(this){ task ->
-                        if(task.isSuccessful)
-                        {
-                            Log.d("TAG", "Sign In With Google : Success")
-                            goto()
-                        }
-                        else
-                        {
-                            Log.w("TAG", "Sign In With Google: Failed", task.exception)
-                        }
-                    }
+                if(account != null)
+                    getGoogleAuthCredential(account)
             }catch (e : ApiException)
             {
                 Log.w("TAG", "Google Sign In Failed", e.cause)
             }
         }
         callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun getGoogleAuthCredential(account: GoogleSignInAccount)
+    {
+        val token = account.idToken
+        val credential = GoogleAuthProvider.getCredential(token, null)
+        mainViewModel.loginWithGoogle(credential)
     }
 
     private fun fb(buttonFacebookLogin : LoginButton)

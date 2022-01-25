@@ -10,6 +10,11 @@ import androidx.annotation.RequiresApi
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tare.fitaddict.MainActivity
 import com.tare.fitaddict.R
+import com.tare.fitaddict.firebase.FirestoreHelper
+import com.tare.fitaddict.pojo.entities.UserCalories
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.floor
@@ -27,7 +32,6 @@ class Form : AppCompatActivity() {
         val height = findViewById<EditText>(R.id.ETheight)
         val weight = findViewById<EditText>(R.id.ETweight)
         val submit = findViewById<Button>(R.id.BTform)
-        val db = FirebaseFirestore.getInstance()
         val info = intent.getStringArrayListExtra("info")!!
         val goalAdapter = ArrayAdapter.createFromResource(this, R.array.arrGoal, android.R.layout.simple_spinner_item)
         val activityAdapter = ArrayAdapter.createFromResource(this, R.array.arrActivity, android.R.layout.simple_spinner_item)
@@ -66,26 +70,35 @@ class Form : AppCompatActivity() {
             val user = User(info[0], info[3] ,info[1].toInt(), info[2],goal.selectedItem.toString(), activity.selectedItem.toString()
             ,height.editableText.toString(),weight.editableText.toString(),floor(calorieRequirement).toInt())
             Log.d("TAG", info[0])
-            db.collection("users").document(info[0])
-                .set(user)
-                .addOnSuccessListener {
-                    Log.d("TAG", "added goal with")
-                    goto()
-                }
-                .addOnFailureListener {
-                    it.printStackTrace()
-                }
             val cal = hashMapOf<String, Long>()
             cal["consumedCalories"] = 0
             cal["remainingCalories"] = (floor(calorieRequirement).toInt()).toLong()
-            db.collection(date).document(info[0])
-                .set(cal)
-                .addOnSuccessListener {
-                    Log.d("TAG", "Set consumed as 0")
-                }
-                .addOnFailureListener {
-                    Log.w("TAG", "Failed to set consumed as 0 because :", it)
-                }
+            val newSet = UserCalories(0, floor(calorieRequirement).toInt())
+            GlobalScope.launch(Dispatchers.IO) {
+                FirestoreHelper.newUserAdd(user,info[0])
+                FirestoreHelper.newUserCaloriesSet(newSet,date,info[0])
+                goto()
+            }
+
+
+//            db.collection("users").document(info[0])
+//                .set(user)
+//                .addOnSuccessListener {
+//                    Log.d("TAG", "added goal with")
+//                    goto()
+//                }
+//                .addOnFailureListener {
+//                    it.printStackTrace()
+//                }
+//
+//            db.collection(date).document(info[0])
+//                .set(cal)
+//                .addOnSuccessListener {
+//                    Log.d("TAG", "Set consumed as 0")
+//                }
+//                .addOnFailureListener {
+//                    Log.w("TAG", "Failed to set consumed as 0 because :", it)
+//                }
         }
     }
 

@@ -17,6 +17,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="Theme.Fab_bottom_nav" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">#0F9D58</item>
+        <item name="colorPrimaryVariant">#0F9D58</item>
+        <item name="colorOnPrimary">#000</item>
+    </style>
     <style name="Theme.FitAddict.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.FitAddict.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

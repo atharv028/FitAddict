@@ -1,46 +1,45 @@
 package com.tare.fitaddict.diary.FoodAdapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tare.fitaddict.R
-import com.tare.fitaddict.diary.ResObj
+import com.tare.fitaddict.databinding.ItemFoodBinding
+import com.tare.fitaddict.pojo.entities.Food
+import com.tare.fitaddict.utils.DiffUtilFood
 
 class LunchAdapter : RecyclerView.Adapter<LunchAdapter.VH>() {
-    private val arrayList : ArrayList<ResObj> = ArrayList()
-    inner class VH(itemView : View) : RecyclerView.ViewHolder(itemView)
-    {
-        val name : TextView = itemView.findViewById(R.id.TVDiaryFoodName)
-        val calorie : TextView = itemView.findViewById(R.id.TVDiaryCal)
+    private var itemList: List<Food> = listOf()
+
+    inner class VH(private val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(currentItem: Food) {
+            binding.item = currentItem
+            binding.executePendingBindings()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.listitem_diary,parent,false)
-        return VH(view)
+        val v: ItemFoodBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_food,
+            parent,
+            false
+        )
+        return VH(v)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val curr = arrayList[position]
-        holder.name.text = curr.label
-        holder.calorie.text = "${curr.nutrients[0].toString()} cal"
+        holder.bind(itemList[position])
     }
 
-    override fun getItemCount(): Int {
-        return arrayList.size
-    }
+    override fun getItemCount(): Int = itemList.size
 
-
-    fun addAll(list : ArrayList<ResObj>)
-    {
-        arrayList.clear()
-        arrayList.addAll(list)
-        notifyDataSetChanged()
-    }
-    fun print()
-    {
-        Log.d("TAG", arrayList.toString())
+    fun addAll(updated: List<Food>?) {
+        val old = itemList
+        itemList = updated ?: listOf()
+        val diff = DiffUtil.calculateDiff(DiffUtilFood(old, itemList), true)
+        diff.dispatchUpdatesTo(this)
     }
 }

@@ -1,7 +1,6 @@
 package com.tare.fitaddict.diary
 
 import android.content.Context
-import android.os.AsyncTask
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView

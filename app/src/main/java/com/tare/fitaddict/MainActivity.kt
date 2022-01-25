@@ -16,12 +16,11 @@ import com.tare.fitaddict.recipes.RecipesFragment
 import com.tare.fitaddict.workout.WorkoutFragment
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bottomNavigation : BottomNavigationView
-    private lateinit var auth : FirebaseAuth
-    private lateinit var db : FirebaseFirestore
+    private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
         val home = HomeFragment()
         val diary = DiaryFragment()
@@ -32,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         bottomNavigation = findViewById(R.id.bottomNav)
         bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId)
-            {
+            when (it.itemId) {
                 R.id.home -> {
                     setCurrentFragment(home)
                 }
@@ -50,27 +48,41 @@ class MainActivity : AppCompatActivity() {
             return@setOnItemSelectedListener true
         }
     }
-    private fun setCurrentFragment(fragment: Fragment)=
+
+    private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment,fragment)
+            replace(R.id.flFragment, fragment)
             commit()
         }
 
+    fun openSubContentFragment(fragment: Fragment)
+    {
+        val manager = supportFragmentManager.beginTransaction()
+        manager.let {
+            it.setCustomAnimations(
+                R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            it.addToBackStack("recipe")
+            it.add(R.id.recipe_view,fragment)
+            it.commit()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.mymenu,menu)
+        menuInflater.inflate(R.menu.mymenu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if(id == R.id.mybutton)
-        {
+        if (id == R.id.mybutton) {
             MaterialAlertDialogBuilder(this)
                 .setTitle("Do you Want To Log Out?")
-                .setNegativeButton("No"){ dialog, _ ->
+                .setNegativeButton("No") { dialog, _ ->
                     dialog.cancel()
                 }
-                .setPositiveButton("Yes"){ _, _ ->
+                .setPositiveButton("Yes") { _, _ ->
                     auth.signOut()
                     val intent = Intent(this, Start::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY

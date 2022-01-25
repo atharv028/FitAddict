@@ -1,62 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".diary.FoodSearch">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tvFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Food Search"
-        android:layout_margin="20dp"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        />
-    <LinearLayout
-        android:id="@+id/llFoodSearch"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tare.fitaddict.search.FoodSearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvFood"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
-        >
-        <AutoCompleteTextView
-            android:id="@+id/AutoFood"
-            android:layout_width="0dp"
+        android:layout_height="match_parent"
+        tools:context=".search.FoodSearch">
+
+        <TextView
+            android:id="@+id/tvFood"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:hint="Name of food"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Food Search"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:textColor="@color/black"
             />
-        <ImageButton
-            android:id="@+id/IBsearch"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_search_black_24dp"
+        <LinearLayout
+            android:id="@+id/llFoodSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvFood"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/AutoFood"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:text="@={viewModel.query}"
+                android:hint="Name of food"
+                />
+            <ImageButton
+                android:id="@+id/IBsearch"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:onClick="@{() -> viewModel.fetchSearchResult()}"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_search_black_24dp"
+                />
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RVFoodSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/llFoodSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="20dp"
+            app:searchItemViewModel="@{viewModel.searchResult}"
+            app:searchItemView="@{viewModel}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
-    </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RVFoodSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/llFoodSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

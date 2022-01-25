@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tare.fitaddict.login.LoginViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".login.Form">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="About You"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40sp"
+            android:text="What is your Goal?"
+            android:textSize="20dp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:entries="@array/arrGoal"
+            app:selectedValue="@={viewModel.goal}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40sp"
+            android:text="What is your activity level?"
+            android:textSize="20dp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:entries="@array/arrActivity"
+            app:selectedValue="@={viewModel.activityLevel}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40sp"
+            android:text="Height"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ETheight"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:hint="0 cm"
+            android:inputType="numberDecimal"
+            android:text="@={viewModel.height}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40sp"
+            android:text="Weight"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ETweight"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:hint="0 kg"
+            android:inputType="numberDecimal"
+            android:text="@={viewModel.weight}" />
+
+        <Button
+            android:id="@+id/BTform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Done"
+            android:onClick="@{() -> viewModel.submitForm()}"/>
+
+    </LinearLayout>
+</layout>

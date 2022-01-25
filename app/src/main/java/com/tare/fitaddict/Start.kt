@@ -7,15 +7,17 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.tare.fitaddict.login.Login
+import com.tare.fitaddict.login.LoginFragment
 import com.tare.fitaddict.login.Signup
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
 class Start : AppCompatActivity() {
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -23,13 +25,24 @@ class Start : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val signup = findViewById<Button>(R.id.BTsignup)
         val login = findViewById<Button>(R.id.BTlogin)
-        signup.setOnClickListener{
+        signup.setOnClickListener {
             val intent = Intent(this, Signup::class.java)
             startActivity(intent)
         }
         login.setOnClickListener {
+//            replaceFragment(LoginFragment())
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
+        }
+    }
+
+    fun replaceFragment(fragment: Fragment)
+    {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.let {
+            it.replace(R.id.layout_login,fragment)
+            it.addToBackStack(null)
+            it.commit()
         }
     }
 

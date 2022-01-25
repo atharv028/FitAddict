@@ -1,383 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".diary.DiaryFragment">
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tare.fitaddict.diary.DiaryViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".diary.DiaryFragment">
 
-    <TextView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/tempnn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calories"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        />
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:id="@+id/llCalories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tempnn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:layout_gravity="center"
-            >
-            <TextView
-                android:layout_gravity="center"
-                android:id="@+id/diaryCalGoal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/xyz"
-                />
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Goal"
-                />
-        </LinearLayout>
         <TextView
-            android:layout_gravity="center"
+            android:id="@+id/tempnn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:padding="20dp"
-            />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Calories"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_gravity="center"
+            android:id="@+id/llCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            >
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tempnn">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/diaryCalGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{viewModel.goalCalories}"
+                    android:hint="@string/xyz" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Goal"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="-" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/diaryCalFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@{viewModel.consumedCalories}"
+                    android:hint="@string/xyz" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Food"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="=" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/diaryCalRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{viewModel.remainingCalories}"
+                    android:hint="@string/xyz" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Remaining"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llCalories">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Breakfast"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TVBreakfastCalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="@{viewModel.breakfastCalories + ` cal`, default= 0}"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/breakfastList"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:loadFoodItemsBreakfast="@{viewModel.breakfastList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/empty" />
+
+                <TextView
+                    android:id="@+id/addbreakfast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rectangle"
+                    android:clickable="true"
+                    android:onClick="@{(view) -> viewModel.addFood(view,`breakfast`)}"
+                    android:focusable="true"
+                    android:text=" Add Food" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Lunch"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TVLunchCalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="@{viewModel.lunchCalories + ` cal`, default = 0}"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lunchList"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:loadFoodItemsLunch="@{viewModel.lunchList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/empty" />
+
+                <TextView
+                    android:id="@+id/addlunch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rectangle"
+                    android:clickable="true"
+                    android:onClick="@{(view) -> viewModel.addFood(view,`lunch`)}"
+                    android:focusable="true"
+                    android:text=" Add Food" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Dinner"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TVDinnerCalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="@{viewModel.dinnerCalories + ` cal`, default = 0}"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dinnerList"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:loadFoodItemsDinner="@{viewModel.dinnerList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/empty" />
+
+                <TextView
+                    android:id="@+id/addDinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rectangle"
+                    android:clickable="true"
+                    android:onClick="@{(view) -> viewModel.addFood(view, `dinner`)}"
+                    android:focusable="true"
+                    android:text=" Add Food" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Snacks"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TVSnaccalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="@{viewModel.snackCalories + ` cal`, default = 0}"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/snackList"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:loadFoodItemsSnacks="@{viewModel.snackList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/empty" />
+
+                <TextView
+                    android:id="@+id/addSnacks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rectangle"
+                    android:clickable="true"
+                    android:onClick="@{(view) -> viewModel.addFood(view,`snack`)}"
+                    android:focusable="true"
+                    android:text=" Add Food" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/leftDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
                 android:gravity="center"
+                android:padding="10dp"
+                android:onClick="@{() -> viewModel.dateMinus()}"
+                android:text="@string/less"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/currDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/diaryCalFood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/xyz"
-                />
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Food"
-                />
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="="
-            android:padding="20dp"
-            />
-        <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            >
-            <TextView
-                android:layout_gravity="center"
-                android:id="@+id/diaryCalRemaining"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/xyz"
-                />
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remaining"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/llCalories"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Breakfast"
-                android:layout_marginStart="8dp"
-                />
-            <TextView
-                android:id="@+id/TVBreakfastCalories"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0 cal"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            >
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/breakfastList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/empty"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                android:gravity="center"
+                android:hint="Tomorrow"
+                android:text="@{viewModel.shownDate}"
+                android:padding="10dp"
+                android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/addbreakfast"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle"
+                android:id="@+id/rightDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="20dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:text=" Add Food"/>
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="@{() -> viewModel.datePlus()}"
+                android:text="@string/more"
+                android:textSize="30sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            >
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lunch"
-                android:layout_marginStart="8dp"
-                />
-            <TextView
-                android:id="@+id/TVLunchCalories"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0 cal"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            >
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lunchList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/empty"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
-
-            <TextView
-                android:id="@+id/addlunch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle"
-                android:clickable="true"
-                android:focusable="true"
-                android:text=" Add Food"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            >
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dinner"
-                android:layout_marginStart="8dp"
-                />
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:id="@+id/TVDinnerCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0 cal"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            >
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dinnerList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/empty"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
-
-            <TextView
-                android:id="@+id/addDinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle"
-                android:clickable="true"
-                android:focusable="true"
-                android:text=" Add Food"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            >
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Snacks"
-                android:layout_marginStart="8dp"
-                />
-            <TextView
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:id="@+id/TVSnackCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0 cal"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            >
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/snackList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/empty"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
-
-            <TextView
-                android:id="@+id/addSnacks"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle"
-                android:clickable="true"
-                android:focusable="true"
-                android:text=" Add Food"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        >
-    <TextView
-        android:clickable="true"
-        android:padding="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_gravity="start"
-        android:id="@+id/leftDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/less"
-        android:gravity="center"
-        android:textSize="30sp"
-        />
-    <TextView
-        android:layout_gravity="center"
-        android:id="@+id/currDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Tomorrow"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:padding="10dp"
-        />
-    <TextView
-        android:clickable="true"
-        android:padding="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_gravity="end"
-        android:id="@+id/rightDate"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/more"
-        android:textSize="30sp"
-        />
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
