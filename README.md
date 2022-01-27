@@ -1,5 +1,6 @@
 # FitAddict
-![](https://komarev.com/ghpvc/?username=atharv028)
+![](https://komarev.com/ghpvc/?username=atharv028&color=blueviolet&style=plastic&label=Peoples)
+
 A complete app for fitness enthusiasts to track calories, find workouts and discover delicious recipes
 
 ***
