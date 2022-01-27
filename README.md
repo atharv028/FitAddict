@@ -1,4 +1,5 @@
 # FitAddict
+![](https://komarev.com/ghpvc/?username=atharv028)
 A complete app for fitness enthusiasts to track calories, find workouts and discover delicious recipes
 
 ***
